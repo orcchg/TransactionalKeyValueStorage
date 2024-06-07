@@ -1,0 +1,8 @@
+[versions]
+version-hamcrest = "2.2"
+version-kotlin-coroutines = "1.8.1"
+
+[libraries]
+hamcrest = { module = "org.hamcrest:hamcrest", version.ref = "version-hamcrest" }
+kt-coroutines-core = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-core", version.ref = "version-kotlin-coroutines" }
+kt-coroutines-test = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-test", version.ref = "version-kotlin-coroutines" }
