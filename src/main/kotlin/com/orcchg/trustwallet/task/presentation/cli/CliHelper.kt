@@ -4,7 +4,6 @@ import com.orcchg.trustwallet.task.data.RealStorage
 import com.orcchg.trustwallet.task.data.local.InMemoryDatabase
 import com.orcchg.trustwallet.task.domain.Storage
 import com.orcchg.trustwallet.task.domain.model.TransactionStatus
-import com.orcchg.trustwallet.task.domain.model.Value
 
 /**
  * CLI for the transactional key-value storage. Supports the following interface:
