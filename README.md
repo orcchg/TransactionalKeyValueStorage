@@ -1,6 +1,8 @@
-Welcome to a Key-Value Storage !
+## Welcome to a Key-Value Storage !
 
-Note for code reviewers: the assignment statement mentions that the
+### Note for code reviewers
+
+This assignment's statement mentions that the
 storage should be extendable, if possible. But the database can be
 implemented in memory. I'm using `kotlin-coroutines` and make database
 and storage methods `suspend` because in case database will be replaced
@@ -39,7 +41,7 @@ from the `TrustWalletTask.main` module.
 
 For some reason the execution may have poor performance.
 
-### alternatively - with kotlin from CLI
+### with kotlin from CLI
 ```
 brew install kotlin
 ./gradlew build
