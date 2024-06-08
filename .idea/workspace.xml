@@ -5,10 +5,8 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="69a2df46-649c-4994-bbaf-09067b36a698" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/src/main/kotlin/com/orcchg/trustwallet/task/presentation/cli/CliHelper.kt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/kotlin/com/orcchg/trustwallet/task/presentation/cli/CliKeyword.kt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/kotlin/com/orcchg/trustwallet/task/presentation/cli/CliMain.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build.gradle.kts" beforeDir="false" afterPath="$PROJECT_DIR$/build.gradle.kts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/gradle/libs.versions.toml" beforeDir="false" afterPath="$PROJECT_DIR$/gradle/libs.versions.toml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -69,7 +67,7 @@
       <recent name="$PROJECT_DIR$/src/main/kotlin/com/orcchg/trustwallet/task/domain/model" />
     </key>
   </component>
-  <component name="RunManager" selected="Kotlin.CliMainKt">
+  <component name="RunManager" selected="Gradle.Tests in 'TrustWalletTask.test'">
     <configuration name="IntegrationTestRealStorageAndRealDatabase" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
       <ExternalSystemSettings>
         <option name="executionName" />
@@ -142,7 +140,7 @@
       <ForceTestExec>true</ForceTestExec>
       <method v="2" />
     </configuration>
-    <configuration name="TestTransaction" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
+    <configuration name="Tests in 'TrustWalletTask.test'" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
       <ExternalSystemSettings>
         <option name="executionName" />
         <option name="externalProjectPath" value="$PROJECT_DIR$" />
@@ -154,8 +152,6 @@
         <option name="taskNames">
           <list>
             <option value=":test" />
-            <option value="--tests" />
-            <option value="&quot;com.orcchg.trustwallet.task.data.model.TestTransaction&quot;" />
           </list>
         </option>
         <option name="vmOptions" />
@@ -175,11 +171,11 @@
     </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="Gradle.Tests in 'TrustWalletTask.test'" />
         <item itemvalue="Kotlin.CliMainKt" />
         <item itemvalue="Gradle.IntegrationTestRealStorageAndRealDatabase" />
         <item itemvalue="Gradle.IntegrationTestRealStorageAndRealDatabase.RealStorage commit and rollback nested transactions" />
         <item itemvalue="Gradle.IntegrationTestRealStorageAndRealDatabase.RealStorage example - nested transactions" />
-        <item itemvalue="Gradle.TestTransaction" />
       </list>
     </recent_temporary>
   </component>

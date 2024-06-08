@@ -15,7 +15,6 @@ dependencies {
     implementation(libs.kt.coroutines.core)
 
     testImplementation(kotlin("test"))
-    testImplementation(libs.hamcrest)
     testImplementation(libs.kt.coroutines.test)
 }
 
