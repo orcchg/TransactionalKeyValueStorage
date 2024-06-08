@@ -51,7 +51,7 @@ class TestTransaction {
     }
 
     @Test
-    fun `Transaction applyOnTop - this map empty - ontop map without deletes`() {
+    fun `Transaction applyOnTop - this map empty - ontop map`() {
         // Arrange
         val map = mapOf<Key, Operation>()
         val ontop = filledMap()
@@ -60,9 +60,7 @@ class TestTransaction {
         val result = map.applyOnTop(ontop)
 
         // Assert
-        val ontopNoDeletes = ontop.filterValues { it !is Operation.Delete }
-
-        assertMapEquals(ontopNoDeletes, result)
+        assertMapEquals(ontop, result)
     }
 
     @Test
@@ -84,7 +82,7 @@ class TestTransaction {
 
         // Assert
         val merged = map.toMutableMap().apply {
-            putAll(ontop.filterValues { it !is Operation.Delete })
+            putAll(ontop)
         }
 
         assertMapEquals(merged, result)
@@ -143,7 +141,9 @@ class TestTransaction {
             "foo" to Operation.Set(key = "foo", value = "123-x"),
             "bar" to Operation.Set(key = "bar", value = "abc-x"),
             "baz" to Operation.Set(key = "baz", value = "play-x"),
+            "del" to Operation.Delete(key = "del"),
             "quo" to Operation.Set(key = "quo", value = "9801-x"),
+            "how" to Operation.Delete(key = "how"),
             "toa" to Operation.Set(key = "toa", value = "zoi4-x")
         )
 
@@ -167,9 +167,14 @@ class TestTransaction {
 
         // Assert
         val applied = mapOf(
+            "key_1" to Operation.Delete(key = "key_1"),
+            "foo" to Operation.Delete(key = "foo"),
+            "bar" to Operation.Delete(key = "bar"),
             "baz" to Operation.Set(key = "baz", value = "play"),
+            "key_3" to Operation.Delete(key = "key_3"),
             "del" to Operation.Delete(key = "del"),
             "how" to Operation.Delete(key = "how"),
+            "quo" to Operation.Delete(key = "quo"),
             "toa" to Operation.Set(key = "toa", value = "zoi4")
         )
 
@@ -194,7 +199,7 @@ class TestTransaction {
         val result = map.applyOnTop(ontop)
 
         // Assert
-        assertTrue { result.isEmpty() }
+        assertMapEquals(ontop, result)
     }
 
     @Test
@@ -217,12 +222,15 @@ class TestTransaction {
         // Assert
         val applied = mapOf(
             "foo" to Operation.Set(key = "foo", value = "trust"), // modified
+            "bar" to Operation.Delete(key = "bar"),
+            "baz" to Operation.Delete(key = "baz"),
             "del" to Operation.Delete(key = "del"),
             "quo" to Operation.Set(key = "quo", value = "42"), // modified
             "how" to Operation.Delete(key = "how"),
             "toa" to Operation.Set(key = "toa", value = "zoi4"),
             "key_1" to Operation.Set(key = "key_1", value = "3.1415"),
-            "key_3" to Operation.Set(key = "key_3", value = "wallet")
+            "key_3" to Operation.Set(key = "key_3", value = "wallet"),
+            "must" to Operation.Delete(key = "must")
         )
 
         assertMapEquals(applied, result)
@@ -251,12 +259,13 @@ class TestTransaction {
         val applied = mapOf(
             "foo" to Operation.Set(key = "foo", value = "modified"), // modified
             "bar" to Operation.Set(key = "bar", value = "abc"), // not changed
-            // baz deleted
+            "baz" to Operation.Delete(key = "baz"),
             "del" to Operation.Delete(key = "del"),
             "quo" to Operation.Set(key = "quo", value = "9801"), // not changed
-            // how deleted
+            "how" to Operation.Delete(key = "how"),
             "toa" to Operation.Set(key = "toa", value = "zoi4-x"), // modified
             "some_key" to Operation.Set(key = "some_key", value = "12345"), // added
+            "del_key" to Operation.Delete(key = "del_key"),
             "new_key" to Operation.Set(key = "new_key", value = "hello") // added
         )
 
