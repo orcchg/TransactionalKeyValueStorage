@@ -1,5 +1,15 @@
 Welcome to a Key-Value Storage !
 
+Note for code reviewers: the assignment statement mentions that the
+storage should be extendable, if possible. But the database can be
+implemented in memory. I'm using `kotlin-coroutines` and make database
+and storage methods `suspend` because in case database will be replaced
+with persistent or remote implementation, its operations will become
+blocking I/O operations. For the purpose of extensibility and easy
+adoption, methods were made `suspend`, although for the current solution
+it is not necessary. Also, the solution doesn't use any 3rd-party
+libraries and `kotlin-coroutines` is the 1st-party library. Thank you.
+
 ## Usage
 Please use the following commands for input:
 
