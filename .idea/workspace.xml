@@ -5,11 +5,10 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="69a2df46-649c-4994-bbaf-09067b36a698" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/src/test/kotlin/com/orcchg/trustwallet/task/data/model/TestTransaction.kt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/kotlin/com/orcchg/trustwallet/task/presentation/cli/CliHelper.kt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/kotlin/com/orcchg/trustwallet/task/presentation/cli/CliKeyword.kt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/kotlin/com/orcchg/trustwallet/task/presentation/cli/CliMain.kt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/kotlin/com/orcchg/trustwallet/task/data/RealStorage.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/kotlin/com/orcchg/trustwallet/task/data/RealStorage.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/kotlin/com/orcchg/trustwallet/task/data/model/Transaction.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/kotlin/com/orcchg/trustwallet/task/data/model/Transaction.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/kotlin/com/orcchg/trustwallet/task/data/IntegrationTestRealStorageAndRealDatabase.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/kotlin/com/orcchg/trustwallet/task/data/IntegrationTestRealStorageAndRealDatabase.kt" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -21,13 +20,23 @@
       <ProjectState />
     </projectState>
   </component>
+  <component name="ExternalProjectsManager">
+    <system id="GRADLE">
+      <state>
+        <task path="$PROJECT_DIR$">
+          <activation />
+        </task>
+        <projects_view />
+      </state>
+    </system>
+  </component>
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
-        <option value="Kotlin File" />
         <option value="Kotlin Interface" />
         <option value="Kotlin Data Class" />
         <option value="Kotlin Enum" />
+        <option value="Kotlin File" />
         <option value="Kotlin Class" />
       </list>
     </option>
@@ -60,7 +69,7 @@
       <recent name="$PROJECT_DIR$/src/main/kotlin/com/orcchg/trustwallet/task/domain/model" />
     </key>
   </component>
-  <component name="RunManager" selected="Gradle.IntegrationTestRealStorageAndRealDatabase">
+  <component name="RunManager" selected="Kotlin.CliMainKt">
     <configuration name="IntegrationTestRealStorageAndRealDatabase" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
       <ExternalSystemSettings>
         <option name="executionName" />
@@ -133,30 +142,6 @@
       <ForceTestExec>true</ForceTestExec>
       <method v="2" />
     </configuration>
-    <configuration name="TestInMemoryDatabase" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
-      <ExternalSystemSettings>
-        <option name="executionName" />
-        <option name="externalProjectPath" value="$PROJECT_DIR$" />
-        <option name="externalSystemIdString" value="GRADLE" />
-        <option name="scriptParameters" value="" />
-        <option name="taskDescriptions">
-          <list />
-        </option>
-        <option name="taskNames">
-          <list>
-            <option value=":test" />
-            <option value="--tests" />
-            <option value="&quot;com.orcchg.trustwallet.task.data.local.TestInMemoryDatabase&quot;" />
-          </list>
-        </option>
-        <option name="vmOptions" />
-      </ExternalSystemSettings>
-      <ExternalSystemDebugServerProcess>false</ExternalSystemDebugServerProcess>
-      <ExternalSystemReattachDebugProcess>true</ExternalSystemReattachDebugProcess>
-      <DebugAllEnabled>false</DebugAllEnabled>
-      <ForceTestExec>true</ForceTestExec>
-      <method v="2" />
-    </configuration>
     <configuration name="TestTransaction" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
       <ExternalSystemSettings>
         <option name="executionName" />
@@ -181,13 +166,20 @@
       <ForceTestExec>true</ForceTestExec>
       <method v="2" />
     </configuration>
+    <configuration name="CliMainKt" type="JetRunConfigurationType" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="com.orcchg.trustwallet.task.presentation.cli.CliMainKt" />
+      <module name="TrustWalletTask.main" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="Kotlin.CliMainKt" />
         <item itemvalue="Gradle.IntegrationTestRealStorageAndRealDatabase" />
         <item itemvalue="Gradle.IntegrationTestRealStorageAndRealDatabase.RealStorage commit and rollback nested transactions" />
         <item itemvalue="Gradle.IntegrationTestRealStorageAndRealDatabase.RealStorage example - nested transactions" />
         <item itemvalue="Gradle.TestTransaction" />
-        <item itemvalue="Gradle.TestInMemoryDatabase" />
       </list>
     </recent_temporary>
   </component>
@@ -201,26 +193,5 @@
       <updated>1717754648314</updated>
     </task>
     <servers />
-  </component>
-  <component name="XDebuggerManager">
-    <breakpoint-manager>
-      <breakpoints>
-        <line-breakpoint enabled="true" type="kotlin-line">
-          <url>file://$PROJECT_DIR$/src/main/kotlin/com/orcchg/trustwallet/task/data/RealStorage.kt</url>
-          <line>73</line>
-          <option name="timeStamp" value="11" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="kotlin-line">
-          <url>file://$PROJECT_DIR$/src/main/kotlin/com/orcchg/trustwallet/task/data/RealStorage.kt</url>
-          <line>82</line>
-          <option name="timeStamp" value="12" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="kotlin-line">
-          <url>file://$PROJECT_DIR$/src/main/kotlin/com/orcchg/trustwallet/task/data/RealStorage.kt</url>
-          <line>91</line>
-          <option name="timeStamp" value="13" />
-        </line-breakpoint>
-      </breakpoints>
-    </breakpoint-manager>
   </component>
 </project>
