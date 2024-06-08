@@ -1,14 +1,9 @@
 package com.orcchg.trustwallet.task.data
 
 import com.orcchg.trustwallet.task.data.local.Database
-import com.orcchg.trustwallet.task.data.local.model.keyToDomain
 import com.orcchg.trustwallet.task.data.local.model.keyToDto
-import com.orcchg.trustwallet.task.data.local.model.valueToDomain
 import com.orcchg.trustwallet.task.data.local.model.valueToDto
-import com.orcchg.trustwallet.task.data.model.Delete
-import com.orcchg.trustwallet.task.data.model.Operation
-import com.orcchg.trustwallet.task.data.model.Set
-import com.orcchg.trustwallet.task.data.model.Transaction
+import com.orcchg.trustwallet.task.data.model.*
 import com.orcchg.trustwallet.task.domain.Storage
 import com.orcchg.trustwallet.task.domain.model.Key
 import com.orcchg.trustwallet.task.domain.model.TransactionStatus
@@ -38,7 +33,6 @@ internal class RealStorage(
      * words, there are no open transactions at the moment.
      */
     private var transaction: Transaction? = null
-    private val counters = mutableMapOf<Value, Long>()
 
     override suspend fun get(key: Key): Value? {
         var currentTransaction = transaction
@@ -75,31 +69,36 @@ internal class RealStorage(
     }
 
     override suspend fun count(value: Value): Long {
-        val deletedKeys = mutableSetOf<Key>()
-        val setKeys = mutableSetOf<Key>()
-
+        var snapshot: Map<Key, Operation> = mapOf()
         var currentTransaction = transaction
         while (currentTransaction != null) {
-            currentTransaction.snapshot().forEach { (key, operation) ->
+            /**
+             * When in a nested transaction, apply its operations on top of
+             * its parent transaction, then memorize the result and move on
+             * to the parent transaction. Repeat the process until reaching
+             * the most parent transaction. This process will obtain a complete
+             * snapshot that contains all operations applied.
+             */
+            snapshot = currentTransaction.snapshot().applyOnTop(onTop = snapshot)
+            currentTransaction = currentTransaction.parent
+        }
+
+        /**
+         * Find interesting keys in the database, whose values are equal to [value].
+         * Convert it to a map of transactional operations for convenience, then
+         * apply resulting snapshot on top of it, then calculate final count of unique
+         * keys that have value equal to [value].
+         */
+        return database.findByValue(value = value.valueToDto())
+            .mapValues { (key, value) -> Transaction().Set(key = key, value = value) }
+            .applyOnTop(onTop = snapshot)
+            .mapValues { (_, operation) ->
                 when (operation) {
-                    is Operation.Delete -> deletedKeys.add(key)
-                    is Operation.Set -> if (operation.value == value) {
-                        setKeys.add(key)
-                    }
+                    is Operation.Delete -> null // no value for deleted key
+                    is Operation.Set -> operation.value
                 }
             }
-            currentTransaction = currentTransaction.parent
-        } // while
-
-        return database.findByValue(value = value.valueToDto())
-            .keys
-            .map { it.keyToDomain() }
-            .toMutableSet()
-            .apply {
-                addAll(setKeys)
-                removeAll(deletedKeys)
-            }
-            .size.toLong()
+            .count { (_, v) -> v == value }.toLong()
     }
 
     override suspend fun clear() {
@@ -159,17 +158,8 @@ internal class RealStorage(
             }
             ?: TransactionStatus.Failure(code = TransactionStatus.Code.NoOpenTransaction)
 
-    private suspend fun performDelete(key: Key) {
-        database.get(key = key.keyToDto())?.valueToDomain()?.let { value ->
-//            counters[value] = ((counters[value] ?: 0L) - 1L).coerceAtLeast(0L)
-        }
-        database.delete(key = key.keyToDto())
-    }
+    private suspend fun performDelete(key: Key) = database.delete(key = key.keyToDto())
 
     private suspend fun performSet(key: Key, value: Value?) =
-        value?.let {
-            database.set(key = key.keyToDto(), value = value.valueToDto())
-//                .also { counters[value] = (counters[value] ?: 0L) + 1L }
-        }
-            ?: performDelete(key = key)
+        database.set(key = key.keyToDto(), value = value?.valueToDto())
 }

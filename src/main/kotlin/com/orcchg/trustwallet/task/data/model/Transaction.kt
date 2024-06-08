@@ -15,7 +15,6 @@ import com.orcchg.trustwallet.task.domain.model.Value
  * Belongs to the Data Layer, should not be exposed to any other Layer.
  */
 internal data class Transaction(
-    val id: Long = System.currentTimeMillis(),
     var parent: Transaction? = null,
     private val snapshot: MutableMap<Key, Operation> = mutableMapOf()
 ) {
@@ -37,3 +36,16 @@ internal fun Transaction.Delete(key: Key): Operation.Delete =
 
 internal fun Transaction.Set(key: Key, value: Value?): Operation.Set =
     Operation.Set(key = key, value = value).also(this::addOperation)
+
+/**
+ * Applies [onTop] map on top of this map, replacing or removing corresponding keys,
+ * or adding new keys, if any. Returns the new map that contains final result of
+ * the application.
+ *
+ * This function doesn't modify its arguments.
+ */
+internal fun Map<Key, Operation>.applyOnTop(onTop: Map<Key, Operation>): Map<Key, Operation> {
+    val resultMap = this.toMutableMap() // copy of this map
+    onTop.forEach { (key, operation) -> resultMap[key] = operation }
+    return resultMap
+}
